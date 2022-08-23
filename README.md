@@ -72,8 +72,8 @@
 
 #### Рекомендации:
 
-• Имя сервера: `you.domain`
-• Характеристики: 2vCPU, 2 RAM, External address (Public) и Internal address.
+* Имя сервера: `you.domain`
+* Характеристики: 2vCPU, 2 RAM, External address (Public) и Internal address.
 
 #### Цель:
 
@@ -98,8 +98,8 @@
 
 #### Рекомендации:
 
-• Имена серверов: db01.you.domain и db02.you.domain
-• Характеристики: 4vCPU, 4 RAM, Internal address.
+* Имена серверов: db01.you.domain и db02.you.domain
+* Характеристики: 4vCPU, 4 RAM, Internal address.
 
 #### Цель:
 
@@ -119,8 +119,8 @@
 
 #### Рекомендации:
 
-• Имя сервера: app.you.domain
-• Характеристики: 4vCPU, 4 RAM, Internal address.
+* Имя сервера: app.you.domain
+* Характеристики: 4vCPU, 4 RAM, Internal address.
 
 #### Цель:
 
@@ -129,67 +129,75 @@
 
 #### Ожидаемые результаты:
 
-Виртуальная машина на которой установлен WordPress и Nginx/Apache (на ваше усмотрение).
-В вашей доменной зоне настроена A-запись на внешний адрес reverse proxy:
-https://www.you.domain (WordPress)
-На сервере you.domain отредактирован upstream для выше указанного URL и он смотрит на виртуальную машину на которой установлен WordPress.
-В браузере можно открыть URL https://www.you.domain и увидеть главную страницу WordPress.
+1. Виртуальная машина на которой установлен WordPress и Nginx/Apache (на ваше усмотрение).
+2. В вашей доменной зоне настроена A-запись на внешний адрес reverse proxy:
 
-6. Установка Gitlab CE и Gitlab Runner
+`https://www.you.domain` (WordPress)
+
+3. На сервере `you.domain` отредактирован upstream для выше указанного URL и он смотрит на виртуальную машину на которой установлен WordPress.
+4. В браузере можно открыть URL `https://www.you.domain` и увидеть главную страницу WordPress.
+
+## Установка Gitlab CE и Gitlab Runner
 
 Необходимо настроить CI/CD систему для автоматического развертывания приложения при изменении кода.
 
-Рекомендации:
+#### Рекомендации:
 
-• Имена серверов: gitlab.you.domain и runner.you.domain
-• Характеристики: 4vCPU, 4 RAM, Internal address.
+* Имена серверов: gitlab.you.domain и runner.you.domain
+* Характеристики: 4vCPU, 4 RAM, Internal address.
 
-Цель:
+#### Цель:
 
-Построить pipeline доставки кода в среду эксплуатации, то есть настроить автоматический деплой на сервер app.you.domain при коммите в репозиторий с WordPress.
-Подробнее о Gitlab CI
-Ожидаемый результат:
+* Построить pipeline доставки кода в среду эксплуатации, то есть настроить автоматический деплой на сервер app.you.domain при коммите в репозиторий с WordPress.
+* Подробнее о Gitlab CI
 
-Интерфейс Gitlab доступен по https.
-В вашей доменной зоне настроена A-запись на внешний адрес reverse proxy:
-https://gitlab.you.domain (Gitlab)
-На сервере you.domain отредактирован upstream для выше указанного URL и он смотрит на виртуальную машину на которой установлен Gitlab.
-При любом коммите в репозиторий с WordPress и создании тега (например, v1.0.0) происходит деплой на виртуальную машину.
-7. Установка Prometheus, Alert Manager, Node Exporter и Grafana
+#### Ожидаемый результат:
+
+1. Интерфейс Gitlab доступен по https.
+2. В вашей доменной зоне настроена A-запись на внешний адрес reverse proxy:
+
+`https://gitlab.you.domain` (Gitlab)
+
+3. На сервере you.domain отредактирован upstream для выше указанного URL и он смотрит на виртуальную машину на которой установлен Gitlab.
+4. При любом коммите в репозиторий с WordPress и создании тега (например, v1.0.0) происходит деплой на виртуальную машину.
+
+## Установка Prometheus, Alert Manager, Node Exporter и Grafana
 
 Необходимо разработать Ansible роль для установки Prometheus, Alert Manager и Grafana.
 
-Рекомендации:
+#### Рекомендации:
 
-• Имя сервера: monitoring.you.domain
-• Характеристики: 4vCPU, 4 RAM, Internal address.
+* Имя сервера: monitoring.you.domain
+* Характеристики: 4vCPU, 4 RAM, Internal address.
 
-Цель:
+#### Цель:
 
-Получение метрик со всей инфраструктуры.
-Ожидаемые результаты:
+* Получение метрик со всей инфраструктуры.
 
-Интерфейсы Prometheus, Alert Manager и Grafana доступены по https.
-В вашей доменной зоне настроены A-записи на внешний адрес reverse proxy:
-• https://grafana.you.domain (Grafana)
-• https://prometheus.you.domain (Prometheus)
-• https://alertmanager.you.domain (Alert Manager)
-На сервере you.domain отредактированы upstreams для выше указанных URL и они смотрят на виртуальную машину на которой установлены Prometheus, Alert Manager и Grafana.
-На всех серверах установлен Node Exporter и его метрики доступны Prometheus.
-У Alert Manager есть необходимый набор правил для создания алертов.
-В Grafana есть дашборд отображающий метрики из Node Exporter по всем серверам.
-В Grafana есть дашборд отображающий метрики из MySQL (*).
-В Grafana есть дашборд отображающий метрики из WordPress (*).
-Примечание: дашборды со звёздочкой являются опциональными заданиями повышенной сложности их выполнение желательно, но не обязательно.
+#### Ожидаемые результаты:
 
-Что необходимо для сдачи задания?
+1. Интерфейсы Prometheus, Alert Manager и Grafana доступены по https.
+2. В вашей доменной зоне настроены A-записи на внешний адрес reverse proxy:
+* `https://grafana.you.domain` (Grafana)
+* `https://prometheus.you.domain` (Prometheus)
+* `https://alertmanager.you.domain` (Alert Manager)
+3. На сервере `you.domain` отредактированы upstreams для выше указанных URL и они смотрят на виртуальную машину на которой установлены Prometheus, Alert Manager и Grafana.
+4. На всех серверах установлен Node Exporter и его метрики доступны Prometheus.
+5. У Alert Manager есть необходимый набор правил для создания алертов.
+6. В Grafana есть дашборд отображающий метрики из Node Exporter по всем серверам.
+7. В Grafana есть дашборд отображающий метрики из MySQL (*).
+8. В Grafana есть дашборд отображающий метрики из WordPress (*).
 
-Репозиторий со всеми Terraform манифестами и готовность продемонстрировать создание всех ресурсов с нуля.
-Репозиторий со всеми Ansible ролями и готовность продемонстрировать установку всех сервисов с нуля.
-Скриншоты веб-интерфейсов всех сервисов работающих по HTTPS на вашем доменном имени.
-https://www.you.domain (WordPress)
-https://gitlab.you.domain (Gitlab)
-https://grafana.you.domain (Grafana)
-https://prometheus.you.domain (Prometheus)
-https://alertmanager.you.domain (Alert Manager)
-Все репозитории рекомендуется хранить на одном из ресурсов (github.com или gitlab.com).
+*Примечание: дашборды со звёздочкой являются опциональными заданиями повышенной сложности их выполнение желательно, но не обязательно.
+
+## Что необходимо для сдачи задания?
+
+1. Репозиторий со всеми Terraform манифестами и готовность продемонстрировать создание всех ресурсов с нуля.
+2. Репозиторий со всеми Ansible ролями и готовность продемонстрировать установку всех сервисов с нуля.
+3. Скриншоты веб-интерфейсов всех сервисов работающих по HTTPS на вашем доменном имени.
+* `https://www.you.domain` (WordPress)
+* `https://gitlab.you.domain` (Gitlab)
+* `https://grafana.you.domain` (Grafana)
+* `https://prometheus.you.domain` (Prometheus)
+* `https://alertmanager.you.domain` (Alert Manager)
+4. се репозитории рекомендуется хранить на одном из ресурсов (github.com или gitlab.com).
