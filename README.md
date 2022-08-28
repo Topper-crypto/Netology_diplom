@@ -1,6 +1,6 @@
 # Дипломный практикум в YandexCloud
 
-## [Цели](https://github.com/Topper-crypto/netology_diplom/edit/main/Diplom.md):
+## Цели:
 
 1. Зарегистрировать доменное имя (любое на ваш выбор в любой доменной зоне).
 2. Подготовить инфраструктуру с помощью Terraform на базе облачного провайдера YandexCloud.
@@ -11,6 +11,8 @@
 7. Настроить CI/CD для автоматического развёртывания приложения.
 8. Настроить мониторинг инфраструктуры с помощью стека: Prometheus, Alert Manager и Grafana.
 
+[Полный текст задания](https://github.com/Topper-crypto/netology_diplom/blob/main/Diplom.md)
+
 # Этапы выполнения
 
 ## Регистрация доменного имени
@@ -19,3 +21,9 @@
 
 ## Создание инфраструктуры
 
+1. Был выбран альтернативный вариант(В нашем случае и ситуации - единственный): S3 bucket в YC аккаунте.
+2. Настроили `workspaces`. Воспользовались альтернативным вариантом и используем один workspace, назвав его `stage`.
+img
+3. Домен был делегирован под управление `ns1.yandexcloud.net` и `ns2.yandexcloud.net`.
+4. Вся конфигурация инфраструктуры с комментариями находится в папке [terraform](https://github.com/Topper-crypto/netology_diplom/tree/main/terraform).
+5. Все Ansible роли находятся в папке [ansible](https://github.com/Topper-crypto/netology_diplom/tree/main/ansible).
